@@ -1,0 +1,28 @@
+<form action="/podrate/" method="post" onsubmit="openLoader()">
+    {% csrf_token %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <p>File size is too big.</p>
+        </div>
+    {% endif %}
+
+    <label for="podcast_url">Podcast URL: </label>
+    <input id="podcast_url" type="url" name="podcast_url">
+    <input type="submit" value="OK">
+</form>
+
+<div id="loadingModal" style="display: none;">
+    <button class="btn btn-primary" type="button" disabled>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      Evaluating podcast...
+    </button>
+</div>
+
+<script>
+
+function openLoader() {
+    document.getElementById("loadingModal").style.display = "block";
+  }
+
+</script>

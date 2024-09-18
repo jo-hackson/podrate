@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      {% load bootstrap5 %}
+      {% bootstrap_css %}
+      {% bootstrap_javascript %}
+    <title>Podrate</title>
+    <div>{% include 'nav_bar.html' %}</div>
+</head>
+<body>
+    <div class="container pt-5">
+        <h1>Welcome to Podrate</h1>
+        <h2>a rating system to check suitability</h2>
+        <div class="form-control-lg">{% include 'submit_form.html' %}</div>
+    </div>
+</body>
+</html>

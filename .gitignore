@@ -1,0 +1,7 @@
+.idea/
+bin/
+lib/
+*.cfg
+*.pyc
+*__init__.py
+migrations

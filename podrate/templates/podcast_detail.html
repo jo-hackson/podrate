@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+      {% load bootstrap5 %}
+      {% bootstrap_css %}
+      {% bootstrap_javascript %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    <title>Podcast Detail</title>
+</head>
+<body>
+    {% block includes %}
+    <div class="container pt-5">
+        <h1>Your Podcast is rated...</h1>
+        <br>
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col">
+                    <h3>Overall rating: {{ general_toxicity_rating }}</h3>
+                    <p>Profanity rating: {{ profanity_rating }}</p>
+                    <p>Hate Speech rating: {{ hate_speech_rating }}</p>
+                    <p>Sexual rating: {{ sexual_rating }}</p>
+                    <p>Insult rating: {{ insult_rating }}</p>
+                    <p>Violence or Threat rating: {{ violence_or_threat_rating }}</p>
+                    <p>Graphic rating: {{ graphic_rating }}</p>
+                    <p>Harassment or Abuse rating: {{ harassment_or_abuse_rating }}</p>
+                </div>
+
+            <!--    Code for Chart-->
+                <div class="col-9">
+                    <canvas id="chart"></canvas>
+                    <script>
+                    const labels = ["Profanity Rating", "Hate Speech Rating", "Sexual Rating", "Insult Rating",
+                         "Violence or Threat Rating", "Graphic Rating", "Harassment or Abuse Rating"]
+                    let width, height, gradient;
+                    function getGradient(ctx, chartArea) {
+                      const chartWidth = chartArea.right - chartArea.left;
+                      const chartHeight = chartArea.bottom - chartArea.top;
+                      if (!gradient || width !== chartWidth || height !== chartHeight) {
+                        // Create the gradient because this is either the first render
+                        // or the size of the chart has changed
+                        width = chartWidth;
+                        height = chartHeight;
+                        gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                        gradient.addColorStop(0, 'rgb(54, 162, 235)');
+                        gradient.addColorStop(0.5, 'rgb(255, 205, 86)');
+                        gradient.addColorStop(1, 'rgb(255, 99, 132)');
+                      }
+
+                      return gradient;
+                    }
+
+                    let ctx = document.getElementById("chart").getContext("2d");
+
+                    let chart = new Chart(ctx, {
+                      type: "line",
+                      data: {
+                         labels: labels,
+                         datasets: [
+                            {
+                              borderColor: function(context) {
+                                    const chart = context.chart;
+                                    const {ctx, chartArea} = chart;
+
+                                    if (!chartArea) {
+                                      // This case happens on initial chart load
+                                      return;
+                                    }
+                                    return getGradient(ctx, chartArea);
+                                  },
+                              backgroundColor: "#417690",
+                              data: [{{profanity_rating}}, {{hate_speech_rating}}, {{sexual_rating}},
+                              {{insult_rating}}, {{violence_or_threat_rating}}, {{graphic_rating}},
+                              {{harassment_or_abuse_rating}}],
+                            }
+                         ]
+                      },
+                      options: {
+                        plugins: {
+                        legend: {
+                            display: false
+                         },
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h2>Rate another podcast</h2>
+        {% include 'submit_form.html' %}
+        {% endblock includes %}
+    </div>
+</body>
+
+</html>
