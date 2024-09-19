@@ -1,5 +1,5 @@
 # Podrate
-An app that rates the language of the podcast audio file that you input.
+An app that rates the toxicity level of the audio file that you input. The goal is to be able to rate podcasts and have a understanding of the content prior to listening.
 
 Input an audio file (limit of 80MB). 
 
