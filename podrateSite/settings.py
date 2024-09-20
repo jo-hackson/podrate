@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'chartjs',
     'rest_framework',
+    'django_forms_bootstrap'
 ]
 
 MIDDLEWARE = [
