@@ -59,7 +59,7 @@ DISABLE_COLLECTSTATIC = 1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["podrate-app-yfnwr.ondigitalocean.app"]
 
 
 # Application definition
