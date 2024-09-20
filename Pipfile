@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 boto3 = "*"
 botocore = "*"
-bootstrap5 = "*"
 chartjs = "*"
 django-bootstrap5 = "==23.3"
 django-forms-bootstrap = "*"
