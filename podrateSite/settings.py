@@ -72,7 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'podrate',
-    'bootstrap5',
+    'django_bootstrap5',
     'chartjs',
     'rest_framework',
 ]
