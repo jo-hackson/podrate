@@ -1,3 +1,4 @@
 django-bootstrap5
 Django==5.1.1
 djangorestframework==3.15.2
+botocore
