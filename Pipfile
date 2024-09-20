@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+chartjs = "*"
 django-bootstrap5 = "==23.3"
 django = "==5.1.1"
 djangorestframework = "==3.15.2"
