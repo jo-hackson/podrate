@@ -45,12 +45,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #
 #     return get_secret_value_response['SecretString']
 
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = get_secret("django_podrate_secret_key")
-# AWS_ACCESS_KEY_ID = get_secret("aws_access_key_id")
-# AWS_SECRET_ACCESS_KEY = get_secret("aws_secret_access_key")
-
 SECRET_KEY = os.environ.get("SECRET_KEY")
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
@@ -59,7 +53,7 @@ DISABLE_COLLECTSTATIC = 1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["podrate-app-yfnwr.ondigitalocean.app"]
+ALLOWED_HOSTS = ["podrate.eba-h6kqe6eu.us-west-2.elasticbeanstalk.com"]
 
 
 # Application definition

@@ -5,3 +5,9 @@ lib/
 *.pyc
 *__init__.py
 migrations
+environment.config
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
