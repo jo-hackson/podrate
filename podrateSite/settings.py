@@ -11,50 +11,32 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from botocore.exceptions import ClientError
+import os
 
-import boto3
+from podrateSite import local_settings
+from podrateSite.local_settings import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-
-def get_secret(secret_name):
-    region_name = "us-east-2"
-
-    # Create a Secrets Manager client
-    session = boto3.session.Session()
-    client = session.client(
-        service_name='secretsmanager',
-        region_name=region_name
-    )
-
-    try:
-        get_secret_value_response = client.get_secret_value(
-            SecretId=secret_name
-        )
-    except ClientError as e:
-        # For a list of exceptions thrown, see
-        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-        raise e
-
-    return get_secret_value_response['SecretString']
-
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret("django_podrate_secret_key")
-AWS_ACCESS_KEY_ID = get_secret("aws_access_key_id")
-AWS_SECRET_ACCESS_KEY = get_secret("aws_secret_access_key")
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    SECRET_KEY = local_settings.SECRET_KEY
+    AWS_ACCESS_KEY_ID = local_settings.AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY = local_settings.AWS_SECRET_ACCESS_KEY
+else:
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    DISABLE_COLLECTSTATIC = 1
+
+S3_BUCKET_NAME = "podrate"
+
+
+
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -67,9 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'podrate',
-    'bootstrap5',
+    'django_bootstrap5',
     'chartjs',
     'rest_framework',
+    'django_forms_bootstrap',
+    'bootstrap5'
 ]
 
 MIDDLEWARE = [
